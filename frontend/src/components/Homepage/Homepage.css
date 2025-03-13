@@ -1,0 +1,518 @@
+/* General Reset */
+@import url('https://fonts.googleapis.com/css2?family=Corinthia:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Tilt+Neon&display=swap');
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Nunito", sans-serif;
+}
+body{
+  height: fit-content;
+  padding-bottom: 2%;
+    background-color: #2575fc;
+
+}
+html {
+  scroll-behavior: smooth;
+}
+
+img {
+  width: 100%;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* SECTION - HOME */
+.home {
+  display: grid;
+  grid-template-columns: 45% 50%;
+  place-items: center;
+  gap: 50px;
+  background-color: #efefef; /* White background */
+  overflow: hidden;
+  padding: 130px 80px;
+}
+
+.description {
+  color: #2E294E; /* Dark purple for text */
+  padding: 0 50px;
+}
+
+.description h1 {
+  font-family: "Tilt Neon", sans-serif;
+  font-size: clamp(3rem, 5vw, 4rem);
+  line-height: 1.1;
+  margin-bottom: 30px;
+}
+
+.Bestname {
+  font-family: "Corinthia", cursive;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 1.7em;
+  color: #ff0066;
+}
+
+.gradient-text {
+  border-top: 2px dotted rgba(228, 228, 228, 0.861);
+  border-left: 2px dotted rgba(228, 228, 228, 0.861);
+  font-family: "Tilt Neon", sans-serif;
+  background-image: linear-gradient(90deg, #D90368, #541388, #ab025f, #D52941);
+  color: transparent;
+  background-size: contain;
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+.description p {
+  font-family: "Nunito", sans-serif;
+  padding: 10px;
+  font-size: clamp(0.9rem, 3vw, 1.1rem);
+  line-height: 1.5;
+  margin-bottom: 30px;
+  color: #2E294E; /* Dark purple for text */
+}
+
+#form {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+input {
+  padding-inline-end: 10px;
+  padding-inline-start: 10px;
+  background-color: transparent;
+  outline: transparent;
+  border: 0;
+  border-bottom: 2px solid rgba(45, 41, 78, 0.3); /* Dark purple border */
+  margin-right: 10px;
+  transition: all 0.3s ease-in;
+}
+
+input::placeholder {
+  color: #541388; /* Purple placeholder */
+  opacity: 0.5;
+  font-weight: 500;
+}
+
+input[type="email"] {
+  color: #2E294E; /* Dark purple text */
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+input[type="email"]:focus {
+  border: transparent;
+  outline: 2px dotted #D90368; /* Pink outline */
+  outline-offset: -3px;
+}
+
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3px;
+  max-width: max-content;
+  background: linear-gradient(90deg, #D90368, #541388, #FFD400, #D52941);
+  background-size: 200%;
+  background-position: left;
+  color: #F7F9F9; /* White text */
+  font-size: 1.2rem;
+  font-weight: 500;
+  border: 0;
+  padding: 12px 16px;
+  border-radius: 5px;
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 0.3s ease-in;
+}
+
+.btn:hover {
+  background-position: right;
+}
+
+.users-color-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.item {
+  max-width: 200px;
+  aspect-ratio: 1/1;
+  box-shadow: 0 8px 8px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.5s linear 1 forwards;
+  animation-delay: calc(0.2s * var(--i));
+  opacity: 0;
+}
+
+.item:nth-child(1) { background-color: #D90368; border-radius: 50% 50% 0 50%; }
+.item:nth-child(2) { background-color: #541388; border-radius: 50% 50% 0 0; }
+.item:nth-child(3) { background-color: #FFD400; border-radius: 50%; }
+.item:nth-child(4) { background-color: #D52941; border-radius: 0 0 0 50%; }
+.item:nth-child(5) { background-color: #2E294E; border-radius: 0 50% 50% 0; }
+.item:nth-child(6) { background-color: #F1E9DA; border-radius: 0 50% 50% 50%; }
+.item:nth-child(7) { background-color: #D90368; border-radius: 50% 50% 0 50%; }
+.item:nth-child(8) { background-color: #541388; border-radius: 50% 0 0 50%; }
+.item:nth-child(9) { background-color: #FFD400; border-radius: 0 50% 50% 0; }
+.item:nth-child(10) { background-color: #D52941; border-radius: 50%; }
+.item:nth-child(11) { background-color: #2E294E; border-radius: 50% 0 50% 50%; }
+.item:nth-child(12) { background-color: #F1E9DA; border-radius: 50% 0 0 0; }
+
+@keyframes fadeIn {
+  0% { opacity: 0; transform: scale(0); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+/* Cards Section */
+.cards-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  padding: 2rem;
+  background-color: #f7f9f9;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  padding: 1rem;
+  text-align: center;
+  color: white;
+  background-color: #2e294e; /* Default background color */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.copy {
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.btn {
+  cursor: pointer;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #2e294e;
+  background-color: #ffd400; /* Yellow button */
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #e6b800; /* Darker yellow on hover */
+}
+
+/* Background Images for Cards */
+.card:nth-child(1) {
+  background-image: url('https://images.unsplash.com/photo-1517021897933-0e0319cfbc28?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ');
+  background-size: cover;
+  background-position: center;
+}
+
+.card:nth-child(2) {
+  background-image: url('https://images.unsplash.com/photo-1533903345306-15d1c30952de?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ');
+  background-size: cover;
+  background-position: center;
+}
+
+.card:nth-child(3) {
+  background-image: url('https://images.unsplash.com/photo-1545243424-0ce743321e11?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ');
+  background-size: cover;
+  background-position: center;
+}
+
+.card:nth-child(4) {
+  background-image: url('https://images.unsplash.com/photo-1531306728370-e2ebd9d7bb99?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ');
+  background-size: cover;
+  background-position: center;
+}
+
+/* Media Queries */
+@media (max-width: 1215px) {
+  .btn {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 1015px) {
+  .home {
+    grid-template-columns: 45% 50%;
+    gap: 50px;
+    padding: 140px 50px;
+  }
+
+  .btn {
+    padding: 8px 12px;
+  }
+}
+
+@media (max-width: 865px) {
+  .home {
+    grid-template-columns: 45% 50%;
+    gap: 60px;
+    padding: 130px 70px;
+  }
+
+  .users-color-container {
+    gap: 15px;
+  }
+}
+
+@media (max-width: 815px) {
+  .home {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas: "userscolorcontainer" "description";
+    gap: 30px;
+    padding: 90px 80px 70px;
+  }
+
+  .users-color-container {
+    grid-area: userscolorcontainer;
+    gap: 20px;
+  }
+
+  .description {
+    grid-area: description;
+    padding: 0;
+    text-align: center;
+  }
+
+  #form {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 460px) {
+  .home {
+    gap: 0;
+    padding: 30px 40px;
+  }
+
+  #form {
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    margin-top: 20px;
+  }
+
+  input[type="email"]:focus {
+    outline-offset: 6px;
+  }
+}
+
+
+/* General Styles */
+.section-title {
+  text-align: center;
+  font-size: 2.5rem;
+  margin: 60px 0 40px;
+  color: #333;
+}
+
+.services-section {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 0 20px;
+}
+
+.service-card {
+  width: 300px;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card-image {
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+}
+
+.card-content {
+  padding: 20px;
+  text-align: center;
+}
+
+.card-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px 20px;
+  background: linear-gradient(45deg, #6a11cb, #2575fc);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.card-button:hover {
+  background: linear-gradient(45deg, #2575fc, #6a11cb);
+}
+
+.arrow-icon {
+  font-size: 1.2rem;
+}
+
+.quirky-btn:hover {
+  background-color: #e6b800; /* Darker yellow on hover */
+}
+
+/* Background Images for Cards */
+.zany-card:nth-child(1) {
+  background-image: url('https://knowledge.hubspot.com/hubfs/freeonlinecourses-1.webp');
+  background-size: cover;
+  background-position: center;
+}
+
+.zany-card:nth-child(2) {
+  background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqZx_g2K2F99ksuxib171hL0hfKx8c8OopjQ&s');
+  background-size: cover;
+  background-position: center;
+}
+
+.zany-card:nth-child(3) {
+  background-image: url('https://foundr.com/wp-content/uploads/2023/04/How-to-create-an-online-course.jpg.webp');
+  background-size: cover;
+  background-position: center;
+}
+
+.zany-card:nth-child(4) {
+  background-image: url('https://miro.medium.com/v2/resize:fit:1400/1*2-NfJVycZHWIZAalY315Tg.jpeg');
+  background-size: cover;
+  background-position: center;
+}
+
+/*
+
+The MIT License
+
+Copyright (c) 2024 0xERR0R - https://codepen.io/0xERR0R
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the 'Software'), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+*/
+
+:root {
+  --off-white: #fafaf0;
+  --light-gray: #9ca6a2;
+}
+
+@keyframes infiniteLoop {
+  0% {
+      transform: translate3d(0, 0, 0);
+  }
+  100% {
+      transform: translate3d(calc(-100px * 10), 0, 0);
+  }
+}
+
+section {
+  background: var(--off-white);
+}
+
+.brandsCarousel {
+  max-width: 960px;
+  max-height: 100px;
+  margin: auto;
+  overflow: hidden;
+  position: relative;
+}
+
+.brandsCarousel::before,
+.brandsCarousel::after {
+  content: "";
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(to right, rgba(250, 250, 240, 1) 0%, rgba(250, 250, 240, 0) 100%);
+  position: absolute;
+  z-index: 2;
+}
+
+.brandsCarousel::before {
+  top: 0;
+  left: 0;
+}
+
+.brandsCarousel::after {
+  top: 0;
+  right: 0;
+  transform: rotateZ(180deg);
+}
+
+.carouselTrack {
+  width: calc(100px * 20);
+  animation: infiniteLoop 10s linear infinite;
+  animation-fill-mode: forwards;
+  will-change: transform;
+}
+
+.brandLogo {
+  width: 100px;
+  height: 50px;
+  align-items: center;
+  margin: auto;
+  overflow: hidden;
+}
+
+.brandLogo svg {
+  width: 100px;
+  height: 50px;
+}
+
+/*
+
+NOTE: The content below includes copyright notice information;
+    You may safely omit this content, as it is not essential to the functionality of the carousel.
+
+*/
+
+:root {
+  --dark-gray: #71797e;
+  --heart-red: #a60311;
+  --light-blue: #0096ff;
+}
+

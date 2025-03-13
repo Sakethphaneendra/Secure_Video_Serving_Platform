@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
+const jwt = require('jsonwebtoken');
 const app = express();
 const port = 5000;
 
@@ -50,7 +51,12 @@ const storage = multer.diskStorage({
         cb(null, Date.now() + path.extname(file.originalname)); // Unique filename
     },
 });
+
+// Initialize multer middleware
 const upload = multer({ storage });
+
+// Secret key for JWT (use environment variables in production)
+const secretKey = process.env.SECRET_KEY || '3x@mpl3_S3cr3t_K3y_!23#$_Sup3r_S3cur3';
 
 // Register a user
 app.post('/register', async (req, res) => {
@@ -76,7 +82,10 @@ app.post('/login', async (req, res) => {
         const validPassword = await bcrypt.compare(password, user.password);
         if (!validPassword) return res.status(400).send('Invalid password');
 
-        res.status(200).json({ message: 'Login successful', role: user.role });
+        // Generate a JWT token for the user
+        const token = jwt.sign({ userId: user._id, role: user.role }, secretKey, { expiresIn: '1h' });
+
+        res.status(200).json({ message: 'Login successful', role: user.role, token });
     } catch (error) {
         console.error('Error logging in:', error);
         res.status(500).send('Internal Server Error');
@@ -117,55 +126,75 @@ app.get('/courses', async (req, res) => {
     }
 });
 
-// Stream a video
+// Stream a video (with token-based security)
 app.get('/video/:courseId/:videoIndex', async (req, res) => {
     try {
-        const course = await Course.findById(req.params.courseId);
-        if (!course) return res.status(404).send('Course not found');
-
-        const video = course.videos[req.params.videoIndex];
-        if (!video) return res.status(404).send('Video not found');
-
-        const videoPath = path.join(__dirname, video.filePath);
-        const stat = fs.statSync(videoPath); // Get video file stats
-        const fileSize = stat.size;
-        const range = req.headers.range;
-
-        if (range) {
-            // Handle partial content (streaming)
-            const parts = range.replace(/bytes=/, '').split('-');
-            const start = parseInt(parts[0], 10);
-            const end = parts[1] ? parseInt(parts[1], 10) : fileSize - 1;
-
-            if (start >= fileSize) {
-                return res.status(416).send('Requested range not satisfiable');
-            }
-
-            const chunkSize = end - start + 1;
-            const file = fs.createReadStream(videoPath, { start, end });
-            const head = {
-                'Content-Range': `bytes ${start}-${end}/${fileSize}`,
-                'Accept-Ranges': 'bytes',
-                'Content-Length': chunkSize,
-                'Content-Type': 'video/mp4',
-            };
-
-            res.writeHead(206, head);
-            file.pipe(res);
-        } else {
-            // Handle full video request
-            const head = {
-                'Content-Length': fileSize,
-                'Content-Type': 'video/mp4',
-            };
-            res.writeHead(200, head);
-            fs.createReadStream(videoPath).pipe(res);
+      const token = req.query.token || req.headers.authorization?.split(' ')[1]; // Extract token from query or header
+  
+      // Validate the token
+      if (!token) return res.status(403).send('Token is required');
+      const decoded = jwt.verify(token, secretKey);
+      if (!decoded) return res.status(403).send('Invalid or expired token');
+  
+      // Fetch the course and video
+      const course = await Course.findById(req.params.courseId);
+      if (!course) return res.status(404).send('Course not found');
+  
+      const video = course.videos[req.params.videoIndex];
+      if (!video) return res.status(404).send('Video not found');
+  
+      const videoPath = path.join(__dirname, video.filePath);
+      const stat = fs.statSync(videoPath); // Get video file stats
+      const fileSize = stat.size;
+      const range = req.headers.range;
+  
+      if (range) {
+        // Handle partial content (streaming)
+        const parts = range.replace(/bytes=/, '').split('-');
+        const start = parseInt(parts[0], 10);
+        const end = parts[1] ? parseInt(parts[1], 10) : fileSize - 1;
+  
+        if (start >= fileSize) {
+          return res.status(416).send('Requested range not satisfiable');
         }
+  
+        const chunkSize = end - start + 1;
+        const file = fs.createReadStream(videoPath, { start, end });
+        const head = {
+          'Content-Range': `bytes ${start}-${end}/${fileSize}`,
+          'Accept-Ranges': 'bytes',
+          'Content-Length': chunkSize,
+          'Content-Type': 'video/mp4',
+        };
+  
+        res.writeHead(206, head);
+        file.pipe(res);
+      } else {
+        // Handle full video request
+        const head = {
+          'Content-Length': fileSize,
+          'Content-Type': 'video/mp4',
+        };
+        res.writeHead(200, head);
+        fs.createReadStream(videoPath).pipe(res);
+      }
     } catch (error) {
-        console.error('Error streaming video:', error);
-        res.status(500).send('Internal Server Error');
+      console.error('Error streaming video:', error);
+      res.status(500).send('Internal Server Error');
     }
-});
+  });
+
+// In your login component
+const handleLogin = async () => {
+    try {
+        const response = await axios.post('http://localhost:5000/login', { email, password });
+        localStorage.setItem('token', response.data.token); // Store token
+        navigate(response.data.role === 'admin' ? '/admin-dashboard' : '/user-dashboard');
+    } catch (error) {
+        console.error('Error logging in:', error);
+    }
+};
+
 
 // Start the server
 app.listen(port, () => {

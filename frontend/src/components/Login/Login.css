@@ -1,0 +1,123 @@
+/* Login Container */
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #F7F9F9; /* Light background */
+    padding: 2rem;
+    text-align: center;
+    font-family: "Poppins", sans-serif;
+}
+
+/* Title */
+.login-container h1 {
+    font-size: 2.5rem;
+    color: #2E294E; /* Dark purple text */
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+}
+
+/* Message Display */
+.message {
+    padding: 0.75rem;
+    margin: 1rem 0;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    width: 100%;
+    max-width: 300px;
+    text-align: center;
+}
+
+.message.success {
+    background-color: #D1FAE5; /* Light green for success */
+    color: #065F46; /* Dark green text */
+    border: 1px solid #34D399; /* Green border */
+}
+
+.message.error {
+    background-color: #FEE2E2; /* Light red for error */
+    color: #991B1B; /* Dark red text */
+    border: 1px solid #EF4444; /* Red border */
+}
+
+/* Input Fields */
+.login-container input {
+    width: 100%;
+    max-width: 300px;
+    padding: 0.75rem;
+    margin: 0.5rem 0;
+    border: 1px solid #D1D5DB; /* Light gray border */
+    border-radius: 8px;
+    font-size: 1rem;
+    color: #2E294E; /* Dark purple text */
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.login-container input::placeholder {
+    color: #9CA3AF; /* Gray placeholder */
+    opacity: 0.7;
+}
+
+.login-container input:focus {
+    border-color: #6D28D9; /* Purple border on focus */
+    box-shadow: 0 0 5px rgba(109, 40, 217, 0.3); /* Purple shadow */
+}
+
+/* Button */
+.login-container button {
+    width: 100%;
+    max-width: 300px;
+    padding: 0.75rem;
+    margin: 1rem 0;
+    background-color: #6D28D9; /* Purple background */
+    color: #F7F9F9; /* Light text */
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.login-container button:hover {
+    background-color: #5B21B6; /* Darker purple on hover */
+    transform: translateY(-2px); /* Slight lift */
+}
+
+.login-container button:active {
+    transform: translateY(0); /* Reset lift */
+}
+
+/* Link */
+.login-container p {
+    font-size: 0.9rem;
+    color: #2E294E; /* Dark purple text */
+    margin-top: 1rem;
+}
+
+.login-container a {
+    color: #6D28D9; /* Purple link */
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.login-container a:hover {
+    color: #5B21B6; /* Darker purple on hover */
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .login-container h1 {
+        font-size: 2rem;
+    }
+
+    .login-container input,
+    .login-container button {
+        max-width: 100%;
+    }
+}

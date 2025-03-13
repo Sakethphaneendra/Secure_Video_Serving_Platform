@@ -1,0 +1,45 @@
+/* User Dashboard Container */
+.user-dashboard-container {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+/* Courses Grid */
+.courses-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+/* Course Card */
+.course-card {
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.course-card h2 {
+  margin-top: 0;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.course-card p {
+  color: #666;
+}
+
+/* Video Player */
+.react-player {
+  margin-top: 10px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Fallback Message */
+.user-dashboard-container p {
+  text-align: center;
+  color: #888;
+}
